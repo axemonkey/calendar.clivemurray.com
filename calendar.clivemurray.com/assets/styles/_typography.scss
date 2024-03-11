@@ -1,0 +1,25 @@
+.bhLabel {
+	text-transform: uppercase;
+	font-size: 0.75em;
+}
+
+.monthTitle {
+	font-family: "Times New Roman", serif;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 3em;
+	margin: 0;
+}
+
+.monthNav {
+	font-size: 2em;
+}
+
+.monthNav a {
+	text-decoration: none;
+	color: #000;
+}
+
+.monthNav a:hover {
+	text-decoration: underline;
+}
