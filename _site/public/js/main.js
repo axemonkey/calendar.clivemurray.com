@@ -6,15 +6,17 @@ import {getBankHolidays} from './modules/holidays.js';
 
 TODO:
 
-* FIX: bg colors don't print!! AWOOOGA!
-
-* next/prev month links
 * month chooser
 * main styling
-  * including nice fonts
-* print stylesheet
+* including nice fonts
 * themes?
 * about
+
+TO DONE:
+
+* print stylesheet
+* FIX: bg colors don't print!! AWOOOGA!
+* next/prev month links
 
 */
 
