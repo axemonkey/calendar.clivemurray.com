@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="Content-type" content="text/html;charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="generator" content="{{ eleventy.generator }}">
 
 	<link rel="stylesheet" type="text/css" href="/public/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print">
@@ -19,11 +20,8 @@
 	<script>
 		document.querySelector('body').classList.add('js');
 	</script>
-	{{ content | safe }}
 
-	{# <section class="support">
-		<p>&copy; <a href="https://clivemurray.com/">Clive Murray</a></p>
-	</section> #}
+	{{ content | safe }}
 
 	<script nomodule src="/public/js/es5bundle.main.js"></script>
 	<script type="module" src="/public/js/main.js"></script>
