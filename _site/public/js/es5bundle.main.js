@@ -34,10 +34,11 @@
 	TODO:
 
 	* month chooser
+	* about - include a thing about printing at 100% to keep it consistent
+	* "THIS MONTH" button
 	* main styling
 	* including nice fonts
 	* themes?
-	* about
 
 	TO DONE:
 
