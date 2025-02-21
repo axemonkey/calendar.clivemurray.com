@@ -1,11 +1,11 @@
 module.exports = function (eleventyConfig) {
-	eleventyConfig.addPassthroughCopy('calendar.clivemurray.com/public');
-	eleventyConfig.addPassthroughCopy({ 'calendar.clivemurray.com/robots.txt': '/robots.txt' });
+	eleventyConfig.addPassthroughCopy('src/public');
+	eleventyConfig.addPassthroughCopy({ 'src/robots.txt': '/robots.txt' });
 	eleventyConfig.setUseGitIgnore(false);
 	eleventyConfig.setServerOptions({
 		// liveReload: false,
 		watch: [
-			'calendar.clivemurray.com/public/**/*',
+			'src/public/**/*',
 		],
 		showVersion: true,
 	});
