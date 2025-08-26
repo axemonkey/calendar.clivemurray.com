@@ -3,12 +3,8 @@ import path from 'path';
 import sass from 'sass';
 import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
-import {rollup} from 'rollup';
 import {optimize} from 'svgo';
 import sharp from 'sharp';
-import commonjs from '@rollup/plugin-commonjs';
-import {babel} from '@rollup/plugin-babel';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
 import {svgoOptions} from './svgo-config.js';
 
 import {
@@ -231,57 +227,6 @@ async function compileSassFiles(options) {
 }
 
 /**
- * Bundles browser Javascript for non-module-supporting browsers
- *
- * @param {Object} optionsObj - source and destination folders
- */
-async function bundleBrowserJS(optionsObj) {
-	logger.banner('Bundling browser Javascript', jsBannerBranding);
-	const start = Date.now();
-
-	const plugins = [
-		commonjs(),
-		babel({
-			configFile: path.resolve('./babel.config.js'),
-			babelHelpers: 'bundled',
-		}),
-		nodeResolve(), // Locates and bundles third-party dependencies in node_modules
-	];
-
-	const jsFiles = fs
-		.readdirSync(`${optionsObj.source}/js`)
-		.filter(file => {
-			if (path.extname(file).toLowerCase() === '.js') {
-				// logger.info(`Adding ${file} to bundle list\n`);
-				return true;
-			}
-			return false;
-		});
-
-	logger.info(`Found ${jsFiles.length} JS file(s) to bundle\n`);
-
-	for (const file of jsFiles) {
-		const destFile = `${optionsObj.destination}/es5bundle.${file}`;
-		const bundle = await rollup({
-			input: `${optionsObj.source}/js/${file}`,
-			plugins,
-			onwarn(warning) {
-				logger.warning(warning);
-			},
-		});
-
-		await bundle.write({
-			file: destFile,
-			format: 'iife',
-		});
-
-		logger.success(`Bundled ${file} to ${destFile}\n`);
-	}
-
-	logger.success(`Build JS task completed in ${getTimeItTook(start)}`);
-}
-
-/**
  * Concatenates vendor Javascript
  *
  * @param {Object} optionsObj - source and destination folders
@@ -431,7 +376,6 @@ async function copyJs(optionsObj) {
 
 export {
 	compileSassFiles,
-	bundleBrowserJS,
 	copyJs,
 	vendorJs,
 	copyAssetsFunction,

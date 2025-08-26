@@ -1,6 +1,5 @@
 import {assetsRoot} from './project-settings.js';
 import {
-	bundleBrowserJS,
 	copyJs,
 	vendorJs,
 	copyAssetsFunction,
@@ -40,7 +39,6 @@ async function buildJs(siteRoot) {
 		destination: `${siteRoot}/${assetsRoot}/js`,
 	};
 
-	await bundleBrowserJS(options);
 	await copyJs(options);
 	await vendorJs(options);
 }
