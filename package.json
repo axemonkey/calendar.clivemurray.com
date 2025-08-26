@@ -4,7 +4,7 @@
   "private": "true",
   "scripts": {
     "start": "npx @11ty/eleventy --input=./src --serve",
-    "lint-tooling": "npx eslint '*.js' 'tooling/**/*.js'",
+    "lint-tooling": "npx eslint tooling",
     "build": "node tooling/clean.js src && npm-run-all build:*",
     "lint": "npm-run-all lint:* lint-tooling",
     "dev": "npm-run-all lint build && npm-run-all --parallel start watch",
