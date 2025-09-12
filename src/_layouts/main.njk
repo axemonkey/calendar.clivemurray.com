@@ -8,8 +8,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="generator" content="{{ eleventy.generator }}">
 
-	<link rel="stylesheet" type="text/css" href="/public/css/style.css">
-	<link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print">
+	<link rel="stylesheet" type="text/css" href="/public/css/{{assets.style.css}}">
+	<link rel="stylesheet" type="text/css" href="/public/css/{{assets.print.css}}" media="print">
 
 	{# <link rel="apple-touch-icon" sizes="180x180" href="/public/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon/favicon-32x32.png">
@@ -23,7 +23,7 @@
 
 	{{ content | safe }}
 
-	<script type="module" src="/public/js/main.js"></script>
+	<script type="module" src="/public/js/{{assets.main.js}}"></script>
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 $grid-border-width: 1px;
 $grid-border-color: black;
 
-@import "fonts";
-@import "global";
-@import "month";
-@import "days";
-@import "typography";
+@import "partials/fonts";
+@import "partials/global";
+@import "partials/month";
+@import "partials/days";
+@import "partials/typography";

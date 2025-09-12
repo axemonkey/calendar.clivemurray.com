@@ -5,7 +5,7 @@ import {
 import {processImages} from './build-tasks.js';
 import {getTimeItTook} from './build-functions.js';
 
-const siteRoot = process.argv[2];
+const siteRoot = 'src';
 const start = Date.now();
 
 processImages(siteRoot)
