@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "@springernature/stylelint-config"
-  ]
+	"extends": ["@springernature/stylelint-config"]
 }

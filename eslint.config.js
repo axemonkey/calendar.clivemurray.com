@@ -1,13 +1,13 @@
-import { coreConfig, browserConfig } from '@springernature/eslint-config';
+import { coreConfig, browserConfig } from "@springernature/eslint-config";
 import { defineConfig } from "eslint/config";
-import globals from 'globals';
+import globals from "globals";
 
 export default defineConfig([
 	{
 		files: ["**/*.js"],
 		extends: [coreConfig],
 		languageOptions: {
-			globals: { ...globals.browser }
+			globals: { ...globals.browser },
 		},
 		rules: {
 			// custom rules

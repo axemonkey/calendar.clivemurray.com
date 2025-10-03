@@ -9,7 +9,7 @@ const getTheDay = (year, month, day) => {
 	return theDay;
 };
 
-const lz = n => {
+const lz = (n) => {
 	return Number(n) < 10 ? `0${n}` : `${n}`;
 };
 
@@ -18,9 +18,4 @@ const getURLParams = () => {
 	return params;
 };
 
-export {
-	getDaysInMonth,
-	getTheDay,
-	lz,
-	getURLParams,
-};
+export { getDaysInMonth, getTheDay, lz, getURLParams };
