@@ -4,10 +4,11 @@
   "private": "true",
   "scripts": {
     "start": "npx @11ty/eleventy --input=./src --serve",
-    "build": "npm-run-all build:assets build:images",
+    "build": "npm-run-all prettier build:assets build:images",
     "build:assets": "npx sn-assets-pipeline build",
     "build:images": "node tooling/process-images.js",
     "dev": "npm run build && npm-run-all --parallel start watch",
+    "prettier": "npx prettier . -w",
     "watch": "npm-run-all --parallel watch:assets watch:images",
     "watch:assets": "npx sn-assets-pipeline watch",
     "watch:images": "onchange './src/assets/images/**/*' -- npm run build:images"
@@ -35,7 +36,7 @@
     "globals": "^16.4.0",
     "npm-run-all2": "^7.0.1",
     "onchange": "^7.1.0",
-    "prettier": "2.8.2",
+    "prettier": "^3.6.2",
     "sharp": "^0.34.3",
     "stylelint": "^16.24.0",
     "stylelint-config-recommended-scss": "^15.0.1",

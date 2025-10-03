@@ -1,0 +1,7 @@
+node_modules
+tooling
+src/public
+_site
+.git
+package-lock.json
+**/vendor/**
