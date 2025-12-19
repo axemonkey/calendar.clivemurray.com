@@ -13,7 +13,6 @@ TODO:
 
 * month chooser
 * about - include a thing about printing at 100% to keep it consistent
-* "THIS MONTH" button
 * main styling
 * including nice fonts
 * themes?
@@ -24,7 +23,40 @@ TO DONE:
 * FIX: bg colors don't print!! AWOOOGA!
 * next/prev month links
 
+TO DON'T:
+* "THIS MONTH" button *** not needed, when there is Reset in the nav
+
 */
+
+const populatePicker = (year, month) => {
+	const monthSelect = document.getElementById('select-month');
+	const yearInput = document.getElementById('input-year');
+
+	yearInput.value = year;
+
+	monthSelect.replaceChildren(); // empty the dropdown just in case
+	for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
+		const monthOption = document.createElement('option');
+		monthOption.value = monthIndex;
+		monthOption.textContent = months[monthIndex];
+		if (monthIndex === month) {
+			monthOption.selected = true;
+		}
+		monthSelect.append(monthOption);
+	}
+};
+
+const loadMonth = () => {
+	const wMonth = document.getElementById('select-month').value;
+	const wYear = document.getElementById('input-year').value;
+	const newHref = `/?year=${wYear}&month=${wMonth}`;
+
+	document.location = newHref;
+};
+
+const togglePicker = () => {
+	document.querySelector('.monthPicker').classList.toggle('hide');
+};
 
 const init = () => {
 	console.log('go');
@@ -43,6 +75,10 @@ const init = () => {
 
 	createNavButtons(year, month);
 	createMonth(year, month);
+	populatePicker(year, month);
+
+	document.querySelector('.go-button').addEventListener('click', loadMonth);
+	document.querySelector('.monthTitle').addEventListener('click', togglePicker);
 };
 
 const createNavButtons = (year, month) => {

@@ -8,13 +8,19 @@ body {
 }
 
 h1,
-.monthNav {
+nav,
+.monthNav,
+.monthPicker {
 	display: none !important;
 }
 
 main {
 	max-width: none;
 	width: 100%;
+}
+
+.monthTitle {
+	text-decoration: none;
 }
 
 .monthControls {
