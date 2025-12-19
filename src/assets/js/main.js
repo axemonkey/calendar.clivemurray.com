@@ -55,6 +55,10 @@ const createNavButtons = (year, month) => {
 		`<a href="/?year=${prevYear}&month=${prevMonth}">&lt;&lt;</a>`;
 	document.querySelector('.nextMonth').innerHTML =
 		`<a href="/?year=${nextYear}&month=${nextMonth}">&gt;&gt;</a>`;
+
+	document.querySelector('#menu-trigger').addEventListener('click', (event) => {
+		event.target.closest('nav').classList.toggle('open');
+	});
 };
 
 const createMonth = (year, month) => {
