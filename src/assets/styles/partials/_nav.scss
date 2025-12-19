@@ -37,12 +37,14 @@ nav {
 
 	#menu {
 		display: none;
-		padding: 5px;
+		padding: 10px 1rem;
 		text-align: right;
 		font-size: 2rem;
 		position: absolute;
 		top: 4rem;
-		right: 1rem;
+		right: 5px;
+		border-radius: 20px;
+		background: rgba(255 255 255 / 90%);
 
 		ul {
 			padding: none;
