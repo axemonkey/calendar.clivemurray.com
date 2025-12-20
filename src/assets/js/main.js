@@ -11,7 +11,6 @@ import { getBankHolidays } from './modules/holidays.js';
 
 TODO:
 
-* month chooser
 * about - include a thing about printing at 100% to keep it consistent
 * main styling
 * including nice fonts
@@ -19,6 +18,7 @@ TODO:
 
 TO DONE:
 
+* month chooser
 * print stylesheet
 * FIX: bg colors don't print!! AWOOOGA!
 * next/prev month links
