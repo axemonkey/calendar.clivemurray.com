@@ -4,7 +4,6 @@
 	display: flex;
 	flex-direction: column;
 	aspect-ratio: 3 / 4;
-	font-family: "Atkinson-Hyperlegible", sans-serif;
 }
 
 .monthHeader {
@@ -16,6 +15,8 @@
 .monthTitle {
 	text-align: center;
 	width: 100%;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .monthBody {

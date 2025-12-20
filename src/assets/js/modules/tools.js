@@ -13,9 +13,9 @@ const lz = (n) => {
 	return Number(n) < 10 ? `0${n}` : `${n}`;
 };
 
-const getURLParams = () => {
-	const params = new URLSearchParams(document.location.search);
-	return params;
+const getURLParameters = () => {
+	const parameters = new URLSearchParams(document.location.search);
+	return parameters;
 };
 
-export { getDaysInMonth, getTheDay, lz, getURLParams };
+export { getDaysInMonth, getTheDay, lz, getURLParameters };

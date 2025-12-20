@@ -21,6 +21,8 @@
 		document.querySelector('body').classList.add('js');
 	</script>
 
+	{% include "nav.njk" %}
+
 	{{ content | safe }}
 
 	<script type="module" src="/public/js/{{assets.main.js}}"></script>

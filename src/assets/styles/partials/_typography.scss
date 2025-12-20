@@ -1,10 +1,23 @@
-.bhLabel {
+body,
+label,
+select,
+input,
+option,
+button {
+	font-family: var(--body-font);
+}
+
+h1 {
+	font-family: "Comfortaa", sans-serif;
+	font-size: 2em;
+}
+
+.bankHolidayLabel {
 	text-transform: uppercase;
 	font-size: 0.75em;
 }
 
 .monthTitle {
-	font-family: "Times New Roman", serif;
 	text-transform: uppercase;
 	font-weight: normal;
 	font-size: 3em;
@@ -22,4 +35,16 @@
 
 .monthNav a:hover {
 	text-decoration: underline;
+}
+
+.monthPicker {
+	select,
+	input,
+	button {
+		font-size: 1.5em;
+	}
+
+	input[type="text"] {
+		width: 120px;
+	}
 }
