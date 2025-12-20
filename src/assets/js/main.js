@@ -3,7 +3,7 @@ import {
 	getDaysInMonth,
 	getTheDay,
 	lz,
-	getURLParams,
+	getURLParameters,
 } from './modules/tools.js';
 import { getBankHolidays } from './modules/holidays.js';
 
@@ -28,9 +28,37 @@ TO DON'T:
 
 */
 
+const highlightBankHolidays = (bankHolidayArray, year, month, monthLength) => {
+	console.log(bankHolidayArray);
+
+	for (let currentDate = 1; currentDate <= monthLength; currentDate++) {
+		const checkDate = `${year}-${lz(month + 1)}-${lz(currentDate)}`;
+
+		for (const bankHoliday of bankHolidayArray) {
+			if (bankHoliday.date === checkDate) {
+				console.log(`BH found! ${checkDate}`);
+				const bankHolidayDiv = document.querySelector(
+					`[data-date="${checkDate}"]`,
+				);
+				bankHolidayDiv.classList.add('bankHoliday');
+				const bankHolidayLabel = document.createElement('div');
+				bankHolidayLabel.classList.add('bankHolidayLabel');
+				bankHolidayLabel.textContent = 'Bank Holiday';
+				bankHolidayDiv.append(bankHolidayLabel);
+			}
+		}
+	}
+};
+
+const doBankHolidays = async (year, month, monthLength) => {
+	await getBankHolidays(year, month).then((bh) => {
+		highlightBankHolidays(bh, year, month, monthLength);
+	});
+};
+
 const populatePicker = (year, month) => {
-	const monthSelect = document.getElementById('select-month');
-	const yearInput = document.getElementById('input-year');
+	const monthSelect = document.querySelector('#select-month');
+	const yearInput = document.querySelector('#input-year');
 
 	yearInput.value = year;
 
@@ -47,8 +75,8 @@ const populatePicker = (year, month) => {
 };
 
 const loadMonth = () => {
-	const wMonth = document.getElementById('select-month').value;
-	const wYear = document.getElementById('input-year').value;
+	const wMonth = document.querySelector('#select-month').value;
+	const wYear = document.querySelector('#input-year').value;
 	const newHref = `/?year=${wYear}&month=${wMonth}`;
 
 	document.location = newHref;
@@ -58,37 +86,14 @@ const togglePicker = () => {
 	document.querySelector('.monthPicker').classList.toggle('hide');
 };
 
-const init = () => {
-	console.log('go');
-	let year;
-	let month;
-
-	const qp = getURLParams();
-	if (qp.get('year') && qp.get('month')) {
-		year = Number(qp.get('year'));
-		month = Number(qp.get('month'));
-	} else {
-		const now = new Date();
-		month = now.getMonth();
-		year = now.getFullYear();
-	}
-
-	createNavButtons(year, month);
-	createMonth(year, month);
-	populatePicker(year, month);
-
-	document.querySelector('.go-button').addEventListener('click', loadMonth);
-	document.querySelector('.monthTitle').addEventListener('click', togglePicker);
-};
-
 const createNavButtons = (year, month) => {
-	const prevMonth = month === 0 ? 11 : month - 1;
-	const prevYear = month === 0 ? year - 1 : year;
+	const previousMonth = month === 0 ? 11 : month - 1;
+	const previousYear = month === 0 ? year - 1 : year;
 	const nextMonth = month === 11 ? 0 : month + 1;
 	const nextYear = month === 11 ? year + 1 : year;
 
 	document.querySelector('.prevMonth').innerHTML =
-		`<a href="/?year=${prevYear}&month=${prevMonth}">&lt;&lt;</a>`;
+		`<a href="/?year=${previousYear}&month=${previousMonth}">&lt;&lt;</a>`;
 	document.querySelector('.nextMonth').innerHTML =
 		`<a href="/?year=${nextYear}&month=${nextMonth}">&gt;&gt;</a>`;
 
@@ -98,18 +103,18 @@ const createNavButtons = (year, month) => {
 };
 
 const createMonth = (year, month) => {
-	const monthStr = months[month];
+	const monthString = months[month];
 	const monthLength = getDaysInMonth(year, month);
 	// const nowDay = now.getDay();
 	// const dayStr = days[nowDay - 1];
 	const firstDay = getTheDay(year, month, 1);
-	const firstDayStr = days[firstDay - 1];
+	const firstDayString = days[firstDay - 1];
 
-	console.log(`${monthStr} ${year} has ${monthLength} days`);
+	console.log(`${monthString} ${year} has ${monthLength} days`);
 	// console.log(`today: ${dayStr}`);
-	console.log(`first day of month: ${firstDayStr}`);
+	console.log(`first day of month: ${firstDayString}`);
 
-	document.querySelector('.monthTitle').textContent = `${monthStr} ${year}`;
+	document.querySelector('.monthTitle').textContent = `${monthString} ${year}`;
 
 	const monthHeaderDiv = document.querySelector('.monthHeader');
 	const monthDiv = document.querySelector('.monthBody');
@@ -123,26 +128,26 @@ const createMonth = (year, month) => {
 	}
 
 	let week = 1;
-	for (let currDate = 1; currDate <= monthLength; currDate++) {
+	for (let currentDate = 1; currentDate <= monthLength; currentDate++) {
 		const dateDiv = document.createElement('div');
-		dateDiv.innerHTML = `<p>${currDate}</p>`;
-		const theDay = getTheDay(year, month, currDate - 1);
-		dateDiv.className = `day day${currDate} day-${days[
+		dateDiv.innerHTML = `<p>${currentDate}</p>`;
+		const theDay = getTheDay(year, month, currentDate - 1);
+		dateDiv.className = `day day${currentDate} day-${days[
 			theDay
 		].toLowerCase()} week${week}`;
 		if (theDay >= 5) {
 			dateDiv.classList.add('weekend');
 		}
-		if (currDate <= 7) {
+		if (currentDate <= 7) {
 			dateDiv.classList.add('first7');
 		}
-		if (currDate > monthLength - 7) {
+		if (currentDate > monthLength - 7) {
 			dateDiv.classList.add('last7');
 		}
-		if (currDate === monthLength) {
+		if (currentDate === monthLength) {
 			dateDiv.classList.add('last');
 		}
-		dateDiv.dataset.date = `${year}-${lz(month + 1)}-${lz(currDate)}`;
+		dateDiv.dataset.date = `${year}-${lz(month + 1)}-${lz(currentDate)}`;
 		monthDiv.append(dateDiv);
 
 		if (theDay === 6) {
@@ -153,30 +158,27 @@ const createMonth = (year, month) => {
 	doBankHolidays(year, month, monthLength);
 };
 
-const doBankHolidays = async (year, month, monthLength) => {
-	await getBankHolidays(year, month).then((bh) => {
-		highlightBankHolidays(bh, year, month, monthLength);
-	});
-};
+const init = () => {
+	console.log('go');
+	let year;
+	let month;
 
-const highlightBankHolidays = (bhArray, year, month, monthLength) => {
-	console.log(bhArray);
-
-	for (let currDate = 1; currDate <= monthLength; currDate++) {
-		const checkDate = `${year}-${lz(month + 1)}-${lz(currDate)}`;
-
-		for (const bh of bhArray) {
-			if (bh.date === checkDate) {
-				console.log(`BH found! ${checkDate}`);
-				const bhDiv = document.querySelector(`[data-date="${checkDate}"]`);
-				bhDiv.classList.add('bh');
-				const bhLabel = document.createElement('div');
-				bhLabel.classList.add('bhLabel');
-				bhLabel.textContent = 'Bank Holiday';
-				bhDiv.append(bhLabel);
-			}
-		}
+	const queryParameters = getURLParameters();
+	if (queryParameters.get('year') && queryParameters.get('month')) {
+		year = Number(queryParameters.get('year'));
+		month = Number(queryParameters.get('month'));
+	} else {
+		const now = new Date();
+		month = now.getMonth();
+		year = now.getFullYear();
 	}
+
+	createNavButtons(year, month);
+	createMonth(year, month);
+	populatePicker(year, month);
+
+	document.querySelector('.go-button').addEventListener('click', loadMonth);
+	document.querySelector('.monthTitle').addEventListener('click', togglePicker);
 };
 
 window.addEventListener('load', init);
