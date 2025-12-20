@@ -36,3 +36,15 @@ h1 {
 .monthNav a:hover {
 	text-decoration: underline;
 }
+
+.monthPicker {
+	select,
+	input,
+	button {
+		font-size: 1.5em;
+	}
+
+	input[type="text"] {
+		width: 120px;
+	}
+}
