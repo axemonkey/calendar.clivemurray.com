@@ -9,15 +9,10 @@ import { getBankHolidays } from './modules/holidays.js';
 
 /*
 
-TODO:
+TO DONE:
 
 * about - include a thing about printing at 100% to keep it consistent
 * main styling
-* including nice fonts
-* themes?
-
-TO DONE:
-
 * month chooser
 * print stylesheet
 * FIX: bg colors don't print!! AWOOOGA!
@@ -25,6 +20,9 @@ TO DONE:
 
 TO DON'T:
 * "THIS MONTH" button *** not needed, when there is Reset in the nav
+
+MAYBS:
+* themes?
 
 */
 
@@ -96,10 +94,6 @@ const createNavButtons = (year, month) => {
 		`<a href="/?year=${previousYear}&month=${previousMonth}">&lt;&lt;</a>`;
 	document.querySelector('.nextMonth').innerHTML =
 		`<a href="/?year=${nextYear}&month=${nextMonth}">&gt;&gt;</a>`;
-
-	document.querySelector('#menu-trigger').addEventListener('click', (event) => {
-		event.target.closest('nav').classList.toggle('open');
-	});
 };
 
 const createMonth = (year, month) => {
@@ -160,25 +154,35 @@ const createMonth = (year, month) => {
 
 const init = () => {
 	console.log('go');
-	let year;
-	let month;
 
-	const queryParameters = getURLParameters();
-	if (queryParameters.get('year') && queryParameters.get('month')) {
-		year = Number(queryParameters.get('year'));
-		month = Number(queryParameters.get('month'));
-	} else {
-		const now = new Date();
-		month = now.getMonth();
-		year = now.getFullYear();
+	if (document.querySelector('.monthControls')) {
+		console.log('main page');
+		let year;
+		let month;
+
+		const queryParameters = getURLParameters();
+		if (queryParameters.get('year') && queryParameters.get('month')) {
+			year = Number(queryParameters.get('year'));
+			month = Number(queryParameters.get('month'));
+		} else {
+			const now = new Date();
+			month = now.getMonth();
+			year = now.getFullYear();
+		}
+
+		createNavButtons(year, month);
+		createMonth(year, month);
+		populatePicker(year, month);
+
+		document.querySelector('.go-button').addEventListener('click', loadMonth);
+		document
+			.querySelector('.monthTitle')
+			.addEventListener('click', togglePicker);
 	}
 
-	createNavButtons(year, month);
-	createMonth(year, month);
-	populatePicker(year, month);
-
-	document.querySelector('.go-button').addEventListener('click', loadMonth);
-	document.querySelector('.monthTitle').addEventListener('click', togglePicker);
+	document.querySelector('#menu-trigger').addEventListener('click', (event) => {
+		event.target.closest('nav').classList.toggle('open');
+	});
 };
 
 window.addEventListener('load', init);
