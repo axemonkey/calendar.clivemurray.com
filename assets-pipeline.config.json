@@ -47,7 +47,8 @@
 			"bundles": [
 				{
 					"entryPoints": ["src/assets/js/main.js"],
-					"outfile": "src/public/js/main.js"
+					"outfile": "src/public/js/main.js",
+					"target": ["firefox67", "chrome76", "safari14.1", "edge79", "opera62"]
 				}
 			],
 			"assetsManifestFile": "src/_data/assets.json"
