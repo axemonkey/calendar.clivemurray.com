@@ -20,7 +20,7 @@
 		">0.3%, last 5 versions, not dead"
 	],
 	"engines": {
-		"node": "24.15.0"
+		"node": "24.20.0"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "^3.1.6",
